@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Password Validation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="hero1">
+    <div class="input-group">
+        <label id="email-label">Email</label>
+        <input type="email" spellcheck="fasle" id="email-field" onkeyup="validateEmail()">
+        <span id="email-error"></span>
+    </div>
+</div>
+<div class="hero2">
+    <div class="input-group">
+        <label id="password-label">Password</label>
+        <input type="Text" spellcheck="fasle" id="password-field" onkeyup="validatePassword()">
+        <span id="password-error"></span>
+    </div>
+</div>
+<div class="hero3">
+    <button class="cta" onclick="checkValidate()">
+        <span class="hover-underline-animation"> Send Code </span>
+        <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+            <path id="Path_10" data-name="Path 10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+        </svg>
+    </button>
+</div>
+<script>
+    var emailField = document.getElementById("email-field");
+    var emailLabel = document.getElementById("email-label");
+    var emailError = document.getElementById("email-error");
+    var passwordField = document.getElementById("password-field");
+    var passwordLabel = document.getElementById("password-label");
+    var passwordError = document.getElementById("password-error");
+
+    function validateEmail(){
+        if (emailField.value === "") {
+            emailLabel.style.bottom = "15px";
+            emailError.innerHTML = "";
+            emailField.style.borderBottomColor = ""; 
+            return false;
+        }
+        
+        emailLabel.style.bottom = "45px";
+
+        if (!emailField.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+            emailError.innerHTML = "Please enter a valid email";
+            emailField.style.borderBottomColor = "red";
+            emailError.style.top = "120%";
+            return false;
+        }
+        
+        emailError.innerHTML = "";
+        emailField.style.borderBottomColor = "green";
+        emailError.style.top = "100%";
+        return true; 
+    }
+
+    function validatePassword(){
+        if (passwordField.value === "") {
+            passwordLabel.style.bottom = "15px";
+            passwordError.innerHTML = "";
+            passwordField.style.borderBottomColor = ""; 
+            return false;
+        }
+
+        passwordLabel.style.bottom = "45px";
+
+        if (!passwordField.value.match(/^[A-Za-z][A-Za-z0-9!@#$%^&*]*$/)) {
+            passwordError.innerHTML = "Please enter a valid password";
+            passwordField.style.borderBottomColor = "red";
+            passwordError.style.top = "120%";
+            return false;
+        }
+        
+        passwordError.innerHTML = "";
+        passwordField.style.borderBottomColor = "green";
+        passwordError.style.top = "100%";
+        return true; 
+    }
+
+    function checkValidate() {
+        if (validateEmail() && validatePassword()) {
+            alert("Verification code has been sent to " + emailField.value);
+        } else {
+            alert("Please make sure both fields are filled out correctly.");
+        }
+    }
+</script>
+</body>
+</html>
